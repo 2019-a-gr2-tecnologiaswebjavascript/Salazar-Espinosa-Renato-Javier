@@ -1,1 +1,1 @@
-pantallas y botones
+Botones
