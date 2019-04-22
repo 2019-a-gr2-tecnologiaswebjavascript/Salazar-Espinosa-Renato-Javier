@@ -5,17 +5,21 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './item-galeria.component.html',
   styleUrls: ['./item-galeria.component.css']
 })
+
 export class ItemGaleriaComponent implements OnInit {
 
-  title = 'Licoreria';
+  title = 'licoreria';
 
   @Input()
-  textoBoton;   
+  titulo;
+
+  @Input()
+  textoBoton;
 
   @Input()
   nombreItem;
 
-  
+
   constructor() { }
 
   ngOnInit() {
@@ -32,7 +36,7 @@ export class ItemGaleriaComponent implements OnInit {
 }
 
 /*
-@DecoratorsClase() 
+@DecoratorsClase()
 class Usuario{
   @DecoratorsVariable()
   private nombre = 'Adrian';
