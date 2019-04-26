@@ -29,6 +29,9 @@ export class ItemGaleriaComponent implements OnInit {
     alert('Auxilio me desmayo: ' + this.nombreItem);
   }
 
+  alertarBlur(){
+    alert('Alertar blur');
+  }
 
 
 
