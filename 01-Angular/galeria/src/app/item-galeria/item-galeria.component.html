@@ -1,0 +1,15 @@
+<h1 class="rojo">Item galeria - {{title}}</h1>
+<p>Nombre: {{nombreItem}}</p>
+<!-- EVENT BINDING () -> escuchar un Evento -->
+<button (blur)="alertarBlur()" (click)="alertar()">
+   {{textoBoton}}</button>
+
+<!--[] Property Binding (son propiedades o atributos) -->
+<img [src]="url" alt="" (click)="cambiarImagen()">
+
+<!--Directiva->*ngFor-->
+
+<p *ngFor="let  nota of notas">
+    {{nota}}
+
+</p>
