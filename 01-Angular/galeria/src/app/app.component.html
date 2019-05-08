@@ -2,7 +2,7 @@
 <!-- {{interpolacion}}  -->
 
 
-<app-item-galeria *ngFor="let flor of arregloDeFlores">
+<app-item-galeria *ngFor="let flor of arregloFloresJS" [textoBoton]="flor.nombre" [nombreIten]="flor.descripcion">
     {{flor}}
 
 </app-item-galeria>
