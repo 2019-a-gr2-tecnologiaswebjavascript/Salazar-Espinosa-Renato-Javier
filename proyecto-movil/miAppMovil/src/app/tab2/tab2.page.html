@@ -1,31 +1,31 @@
 <ion-header>
-    <ion-toolbar color="primary">
-        <ion-title> Notas </ion-title>
-        <ion-buttons slot="start">
-            <ion-button>
-                <ion-icon name="logo-android"></ion-icon>
-                <!-- <ion-icon slot="icon-only" name="clipboard"></ion-icon> -->
-            </ion-button>
-        </ion-buttons>
 
-    </ion-toolbar>
-    <ion-toolbar color="tertiary">
+    <ion-toolbar>
 
-        <div slot="left"> a la izquierda</div>
-        <ion-button>
-            <ion-icon name="bulb"></ion-icon>
-        </ion-button>
+        <ion-title style="background-color:limegreen;">
+            <h1>Tus Datos</h1>
+        </ion-title>
+
+
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-    <ion-list>
-        <ion-item button detail>
-            <ion-label>Tienda de mascotas</ion-label>
-        </ion-item>
-    </ion-list>
 
+
+
+    <ion-button>
+        <ion-text>1</ion-text>
+
+        <!-- <ion-icon name="bulb"></ion-icon> -->
+    </ion-button>
+    <ion-buttons slot="start">
+        <ion-button>
+            <ion-icon name="logo-android"></ion-icon>
+            <!-- <ion-icon slot="icon-only" name="clipboard"></ion-icon> -->
+        </ion-button>
+    </ion-buttons>
 
     <ion-grid>
         <ion-row>
@@ -42,4 +42,40 @@
         </ion-row>
     </ion-grid>
 
-</ion-content>
+
+
+    <!-- Default textarea -->
+    <ion-textarea></ion-textarea>
+
+    <!-- Textarea in an item with a placeholder -->
+    <ion-item>
+        <ion-textarea placeholder="Nombre"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+        <ion-textarea placeholder=" contraseña"></ion-textarea>
+    </ion-item>
+    <ion-item>
+        <ion-textarea placeholder=" repita la contraseña"></ion-textarea>
+    </ion-item>
+
+    <!-- Textarea in an item with a floating label -->
+    <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-textarea></ion-textarea>
+    </ion-item>
+
+    <!-- Disabled and readonly textarea in an item with a stacked label -->
+    <ion-item>
+        <ion-label position="stacked">Summary</ion-label>
+        <ion-textarea disabled readonly value="Tu contraseña debe tener de 8 a 20 caracteres incluyendo números y mayúsculas">
+        </ion-textarea>
+    </ion-item>
+
+
+
+    <!-- Textarea with custom number of rows and cols -->
+    <ion-item>
+        <ion-label>Notes</ion-label>
+        <ion-textarea rows="6" cols="20" placeholder="Enter any notes here..."></ion-textarea>
+    </ion-item>
