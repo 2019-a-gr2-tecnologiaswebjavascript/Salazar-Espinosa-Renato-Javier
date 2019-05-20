@@ -5,16 +5,16 @@ import { AppComponent } from './app.component';
 import { ItemGaleriaComponent } from './item-galeria/item-galeria.component';
 
 @NgModule({
-  declarations: [ /*//en lod declaration se guardan los compontes
-    //en los import se guardan otros modulos
-    //en los providers van los servicios*/
+  declarations: [ /*//en las declaration se guardan los componentes
+    //en los import se guardan otros modulos*/
+
     AppComponent,
     ItemGaleriaComponent
   ],
-  imports: [
-    BrowserModule
+  imports: [    BrowserModule ], /*van otros modulos*/
+  providers: [/*en los providers/ van los servicios*/
+    CarritoService
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

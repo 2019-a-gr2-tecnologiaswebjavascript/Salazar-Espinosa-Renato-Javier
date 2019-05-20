@@ -35,7 +35,9 @@ export class ItemGaleriaComponent implements OnInit {
   }
 
 
-notas=[1,2,3,4,5,6,7,8,9,10];
+notas=[1,2,3,4,5,6,7,8,9,10]
+
+construtor(private readonly _carriService:Carr)
 
   cambiarImagen(){
   const urlLaguna="https://media-cdn.tripadvisor.com/media/photo-s/0a/af/6f/a8/laguna-de-yahuarcocha.jpg";
