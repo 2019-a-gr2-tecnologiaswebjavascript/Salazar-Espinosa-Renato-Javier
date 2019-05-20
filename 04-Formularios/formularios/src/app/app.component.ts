@@ -5,6 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+@Input(){
+*ngIf=any}
+
 export class AppComponent {
   title = 'formularios';
   nombre: string;
@@ -15,5 +19,14 @@ export class AppComponent {
     console.log(formulario.controls.nombreUsuario.value);
     console.log(this.nombre);
     // this.nombre = "Benito C."
+
+
   }
+}
+
+
+funtion validarCedula (cedula: string){
+
+
+
 }
