@@ -1,0 +1,14 @@
+{
+  "name": "05-ProyectoMongo",
+  "version": "1.0.0",
+  "description": "nuevo proyecto ",
+  "main": "index.js",
+  "author": "Javier Salazar",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.0",
+    "morgan": "^1.9.1"
+  }
+}

@@ -1,0 +1,44 @@
+Nombre: {{nombre}}
+<br> Apellido: {{apellido}}
+<br> Consulta: {{q}}
+<br>
+
+<pre>  Valido: {{formularioUsuario.valid}}</pre>
+<pre>  Invaalido: {{formularioUsuario.invalid}}</pre>
+<form #formularioUsuario="ngForm" novalidate (submit)="guardarUsuario(formularioUsuario)">
+    <label for="nombre">Nombre</label>
+    <input id="nombre" name="nombreUsuario" type="text" [(ngModel)]="nombre">
+
+
+    <br>
+
+
+
+    <label for="apellido">Apellido</label>
+    <input id="apellido" name="apellidoUsuario" type="text" [(ngModel)]="apellido">
+    <br>
+    <label for="consulta">Cedula </label>
+
+    <input id="cedula" name="cedula" type="text" [(ngModel)]="cedula" #vtCedula=""> vtNombre="ngModel";
+    <pre> {{vtNombre| json }}</pre>
+
+    <P *ngIf="formularioUsuario.valid"> Nombre</P>
+    <P *ngIf="formularioUsuario.invalid"> Nombre invalido</P>
+
+    <pre>Valido{{formularioUsuario.valid}}: </pre>
+    <pre>Valido{{formularioUsuario.invalid}}: </pre>
+    <pre>Dirty: {{formularioUsuario.dirty}}: </pre>
+    <pre>Prestine:{{formularioUsuario.pristine}}: </pre>
+    <pre>Touched:{{formularioUsuario.touched}}: </pre>
+    <pre>Untouched:{{formularioUsuario.untouched}}: </pre>
+
+    <button type="button"> Tipo boton</button>
+    <button type="reset"> Tipo reset</button>
+    <button type="submit" [disabled]="formularioUsuario.invalid"> Tipo submit</button>
+    <button> Ir a cedula </button>
+
+</form>
+<!--
+<hijo [nombreHijo]="nombre">
+</hijo>
+-->
