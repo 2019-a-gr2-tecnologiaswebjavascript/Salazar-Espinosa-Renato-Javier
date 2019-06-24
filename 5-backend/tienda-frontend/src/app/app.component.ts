@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
     private readonly _UsuarioHttpService: UsuarioHttpService
   ) {}
   ngOnInit() {
+    productoUsuario;
+
     //"http:localhost:1337"+Usuario
     const url = environment.url + '/Usuario';
     this._httpClient.get(url);

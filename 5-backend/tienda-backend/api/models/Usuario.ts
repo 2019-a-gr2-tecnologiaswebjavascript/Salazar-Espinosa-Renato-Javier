@@ -8,7 +8,10 @@
 module.exports = {
   attributes: {
     nombre: {
-      type: 'string'
+      type: 'string',
+      required: true,
+      minLength: 3,
+      maxLength: 60
     },
     apellido: {
       type: 'string',
@@ -16,14 +19,14 @@ module.exports = {
     },
     cedula: {
       type: 'string',
-      require: true,
+      required: true,
       unique: true,
       minLength: 10,
       maxLength: 25
     },
     username: {
       type: 'string',
-      require: true,
+      required: true,
       unique: true,
       minLength: 3,
       maxLength: 60
@@ -31,32 +34,34 @@ module.exports = {
     sueldo: {
       type: 'number',
       min: 100,
-      max: 5000.0
-      // defaulsTo:100
+      max: 5000.0,
+      defaultsTo: 100
     },
-    estacasado: {
+    estaCasado: {
       type: 'boolean',
       defaultsTo: false
     },
     tipoUsuario: {
-      tyoe: 'string',
-      enum: ['normal', 'pendiente', 'pemiun']
-      // defaultsTo:'normal'
+      type: 'string',
+      enum: ['normal', 'pendiente', 'premium'],
+      defaultsTo: 'normal'
     },
     correo: {
-      type: 'string'
-    }, //confihuracion papá
-
-    //hijo prosucto usuario
+      type: 'string',
+      isEmail: true
+    }, // Configuracion PAPA
     arregloProductosUsuario: {
       // nombre de los hijos
-      collection: 'productoUsuario', //modelo a arelacionarse "hijo"
-      via: '' //nombre dek atributo FK {HIJO} QUE ANÚN NO TENGO
+      collection: 'productoUsuario', // modelo a relacionarse (HIJO)
+      via: 'fkUsuario' // Nombre atributo FK (HIJO)
     }
   }
 };
 
-//ususrio --> ProductoUsuario
-//Producto  < ProductossUsuario  > Usuario
-//Usuario --> Prodicto Usiario
-//Producto ==> ProsuctoUsuario
+// Usuario -> ProductosUsuario
+
+// Producto <  ProductosUsuario    > Usuario
+
+// Usuario -> ProductoUsuario
+
+// Producto -> ProductoUsuario

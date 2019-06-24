@@ -8,20 +8,19 @@
 module.exports = {
 
     attributes: {
-
         cantidad: {
-            type: 'number'
-        }, //configuracio j=hijo
-        fkUsuario: {
-
-            model: 'usuario',
-            required: true
-        },
-        fkProducto: {
-
-            model: 'producto',
-            required: true
+            type: 'number',
+            min: 1
+        }, // Configuracion HIJO
+        fkUsuario: { // Nombre del campo FK
+            model: 'usuario', // Modelo a relacionarse (PAPA)
+            required: true // OPCIONAL!!!!
+        }, // Configuracion HIJO
+        fkProducto: { // Nombre del campo FK
+            model: 'producto', // Modelo a relacionarse (PAPA)
+            required: true // OPCIONAL!!!!
         }
+
     },
 
 };

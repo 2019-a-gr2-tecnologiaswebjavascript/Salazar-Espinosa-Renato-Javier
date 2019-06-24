@@ -6,8 +6,6 @@
  */
 
 module.exports = {
-  cantidad: {
-    type: 'number',
-    min: 1
-  }
+
+
 };
