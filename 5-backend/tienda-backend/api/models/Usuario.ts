@@ -30,23 +30,33 @@ module.exports = {
     },
     sueldo: {
       type: 'number',
-      min:100,
-      max:5000.00
-      defaulsTo:100
+      min: 100,
+      max: 5000.0
+      // defaulsTo:100
     },
-    estacasado:{
-type:'boolean',
-defaultsTo:false
+    estacasado: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+    tipoUsuario: {
+      tyoe: 'string',
+      enum: ['normal', 'pendiente', 'pemiun']
+      // defaultsTo:'normal'
+    },
+    correo: {
+      type: 'string'
+    }, //confihuracion papá
 
-    },
-    tipoUsuario:{
-      tyoe:'string',
-      enum:['normal', 'pendiente','pemiun'],
-      defaultsTo:'normal'
-    },
-    correo:{
-      type:'string'
+    //hijo prosucto usuario
+    arregloProductosUsuario: {
+      // nombre de los hijos
+      collection: 'productoUsuario', //modelo a arelacionarse "hijo"
+      via: '' //nombre dek atributo FK {HIJO} QUE ANÚN NO TENGO
     }
   }
 };
 
+//ususrio --> ProductoUsuario
+//Producto  < ProductossUsuario  > Usuario
+//Usuario --> Prodicto Usiario
+//Producto ==> ProsuctoUsuario
