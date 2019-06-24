@@ -45,3 +45,12 @@ http://localHost:1337/Usuario/:id
  http://localHost:1337/Usuario/1
 
 respuesta -> el Usuario borrado */
+
+//localhost:1337  -Delta  'sails'
+//localhost:4200  -Gamma   'Angular'
+
+//Cualquier Ip esta bloqueado
+//Delta -->quiere llamar a Gamma => BLOQUEADO
+//La razón de bloqueo es pq no se quiere compartir recursos
+
+//cors

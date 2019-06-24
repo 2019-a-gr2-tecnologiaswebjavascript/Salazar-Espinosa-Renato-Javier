@@ -14,6 +14,8 @@
  */
 
 module.exports.datastores = {
+
+
     /***************************************************************************
      *                                                                          *
      * Your app's default datastore.                                            *
@@ -31,8 +33,8 @@ module.exports.datastores = {
      ***************************************************************************/
 
     default: {
-        adapter: 'sails-mysql',
-        url: 'mysql://root:javier@localhost:32779/bddweb'
-            // url: 'mysql://user:password@host:port/database',
-    }
+        // adapter: 'sails-mysql', // sudo npm i sails-mysql
+        // url: 'mysql://root:javier@localhost:32779/bddweb',
+        // url: 'mysql://usuario:clave@localhost:puerto/bdd',
+    },
 };

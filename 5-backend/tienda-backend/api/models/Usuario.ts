@@ -6,8 +6,16 @@
  */
 
 module.exports = {
+
   attributes: {
-    nombre: { type: 'string' },
-    apellido: { type: 'string', required: true }
-  }
+    nombre: {
+      type: 'string'
+    },
+    apellido: {
+      type: 'string',
+      required: true
+    }
+  },
+
 };
+
