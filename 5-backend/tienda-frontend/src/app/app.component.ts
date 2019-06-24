@@ -10,7 +10,10 @@ import { environment } from 'src/environments/environment';
 export class AppComponent implements OnInit {
   title = 'tienda-frontend';
 
-  constructor(private readonly _httpClient: HttpClient) {}
+  constructor(
+    private readonly _httpClient: HttpClient,
+    private readonly _UsuarioHttpService: UsuarioHttpService
+  ) {}
   ngOnInit() {
     //"http:localhost:1337"+Usuario
     const url = environment.url + '/Usuario';
