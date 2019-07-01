@@ -18,6 +18,21 @@ module.exports = {
             required: true,
             unique: true,
             minLength: 4
+        },
+
+        tamanio: {
+
+            type: 'string'
+
+        },
+        fileDescriptor: {
+            type: 'string'
+        },
+        nombreArchivo: {
+            type: 'string'
+        },
+        tipo: {
+            type: 'string'
         }, // Configuracion de papa a hijo
         arregloProductosUsuario: {
             collection: 'productoUsuario', //Modelo a relacionarse --> (Hijo)

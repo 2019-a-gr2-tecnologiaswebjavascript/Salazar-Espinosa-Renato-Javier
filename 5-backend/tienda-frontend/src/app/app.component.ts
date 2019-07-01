@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ProductoHttpService } from './servicios/http/producto-http.service';
-
+import { UsuarioHttpService } from './servicios/http/usuario-http.service';
+import { ProductoUsuarioHttpService } from './servicios/http/producto-usuario-http.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,14 +14,23 @@ export class AppComponent implements OnInit {
 
   constructor(
     private readonly _httpClient: HttpClient,
-    private readonly _ProductoHttpService: ProductoHttpService
+    private readonly _usuarioHttpService: UsuarioHttpService,
+    private readonly _productoHttpService: ProductoHttpService,
+    private readonly _productoUsuarioHttpService: ProductoUsuarioHttpService
   ) {}
+
   ngOnInit() {
-    const usuarioCreado$ = this._ProductoHttpService.crear({
-      nombre: 'Javier',
-      codigo: '1'
+    const usuarioCrear$ = this._usuarioHttpService.crear({
+      nombre: 'Felipe',
+      apellido: 'Caicedo',
+      cedula: '1718137159',
+      correo: 'eadepto@hotmail.com',
+      estaCasado: false,
+      username: 'adrianeguez',
+      sueldo: 120,
+      tipoUsuario: 'normal'
     });
-    usuarioCreado$.subscribe(
+    usuarioCrear$.subscribe(
       nuevoUsuario => {
         console.log(nuevoUsuario);
       },
@@ -29,20 +39,72 @@ export class AppComponent implements OnInit {
       }
     );
 
-    //productoUsuario;
+    const productoCrear$ = this._productoHttpService.crear({
+      nombre: 'Lavadora',
+      codigo: '2547'
+    });
+    productoCrear$.subscribe(
+      nuevoProducto => {
+        console.log(nuevoProducto);
+      },
+      error => {
+        console.error(error);
+      }
+    );
 
-    //"http:localhost:1337"+Usuario
-    //ESTO NO ES MANTENIBLE
+    const productoUsuarioCrear$ = this._productoUsuarioHttpService.crear({
+      cantidad: 25,
+      fkProducto: 1,
+      fkUsuario: 1
+    });
+
+    productoUsuarioCrear$.subscribe(
+      nuevoProductoUsuario => {
+        console.log(nuevoProductoUsuario);
+      },
+      error => {
+        console.error(error);
+      }
+    );
+
     const url = environment.url + '/Usuario';
-    this._httpClient.get(url);
+    //this._httpClient.get(url);
     const listaUsuarios$ = this._httpClient.get(url);
     listaUsuarios$.subscribe(
-      (datos: any) => {
+      datos => {
         console.log(datos);
       },
-      (error: any) => {
+      error => {
         console.log(error);
       }
     );
   }
 }
+
+/*
+
+ createdAt?: number;
+  updatedAt?: number;
+  id?: number;
+  nombre: string;
+  apellido: string;
+  cedula: string;
+  username: string;
+  sueldo?: number;
+  estaCasado?: boolean;
+  tipoUsuario?: 'normal' | 'pendiente' | 'premium';
+  correo?: string;
+  arregloProductosUsuario?: any[];
+
+
+export interface Producto {
+  createdAt?: number;
+  updatedAt?: number;
+  id?: number;
+  nombre: string;
+  codigo: string;
+  arregloProductosUsuario?: any[];
+}
+
+
+*/

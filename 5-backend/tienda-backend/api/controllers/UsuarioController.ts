@@ -13,6 +13,7 @@ module.exports = {
   // REQUEST SAILSJS => https://sailsjs.com/documentation/reference/request-req
   // RESPONSE SAILSJS => https://sailsjs.com/documentation/reference/request-req
   saludar: async (req, res) => {
+    console.log(__dirname);
     const parametros = req.allParams();
     // req.param('nombre'); => 'Adrian'
     console.log(parametros);
@@ -43,6 +44,105 @@ module.exports = {
       return res.serverError({
         error: 400,
         mensaje: 'Peticion invalida'
+      });
+    }
+  },
+  upload: (req, res) => {
+    const parametros = req.allParams();
+
+    const opcionesCarga = {
+      maxBytes: 10000000,
+      dirname: __dirname + '/../../archivos'
+    };
+
+    if (parametros.idProducto) {
+      req.file('imagen').upload(opcionesCarga, async (error, archivosSubidos) => {
+        if (error) {
+          return res.serverError({
+            error: 500,
+            mensaje: 'Error subiendo archivo de imagen'
+          });
+        }
+        const noExistenArchivos = archivosSubidos.length === 0;
+        if (noExistenArchivos) {
+          return res.badRequest({
+            error: 400,
+            mensaje: 'No envia ningun archivo'
+          });
+        } else {
+          console.log(archivosSubidos);
+
+          try {
+            const archivo = archivosSubidos[0];
+            const respuestaActualizar = await Producto.updateOne({
+              id: parametros.idProducto
+            }).set({
+              tamanio: archivo.size,
+              descriptorArchivo: archivo.fd,
+              nombreArchivo: archivo.filename,
+              tipo: archivo.type
+            });
+            return res.ok({
+              mensaje: `Se actualizo el producto ${parametros.idProducto}`
+            });
+          } catch (e) {
+            return res.serverError({
+              error: 500,
+              mensaje: 'Error del servidor'
+            });
+          }
+
+          // LOGICA NEGOCIO
+          // GUARDAR LOS METADATOS DEL ARCHIVO
+          // (ID PRODUCTO)
+
+          return res.ok({ mensaje: 'ok' });
+        }
+      });
+    } else {
+      return res.error({
+        error: 400,
+        mensaje: 'No envia id de producto'
+      });
+    }
+  },
+  download: async (req, res) => {
+    const parametros = req.allParams();
+    if (parametros.idProducto) {
+      try {
+        const productoEncontrado = await Producto.findOne({
+          id: parametros.idProducto
+        });
+
+        if (!productoEncontrado) {
+          return res.badRequest({
+            error: 400,
+            mensaje: 'No existe el producto'
+          });
+        } else {
+          if (productoEncontrado.descriptorArchivo) {
+            return res.download(
+              productoEncontrado.descriptorArchivo,
+              productoEncontrado.nombreArchivo
+            );
+          } else {
+            return res.badRequest({
+              error: 400,
+              mensaje: 'No existe el fd'
+            });
+          }
+        }
+      } catch (e) {
+        console.log(e);
+        return res.serverError({
+          error: 500,
+          mensaje: 'No envia el id del producto'
+        });
+      }
+    } else {
+      return res.serverError({
+        error: 400,
+        mensaje: 'No envia el id del producto'
       });
     }
   }
