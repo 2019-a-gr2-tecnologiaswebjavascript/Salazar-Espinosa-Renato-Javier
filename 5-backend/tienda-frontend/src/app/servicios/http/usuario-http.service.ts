@@ -2,7 +2,7 @@ import { HttpSailsPrincipal } from './http-sails-principal';
 
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment
+import { environment } from '../../../environments/environment';
 import { Usuario } from '../../dto/usuario';
 
 @Injectable()
