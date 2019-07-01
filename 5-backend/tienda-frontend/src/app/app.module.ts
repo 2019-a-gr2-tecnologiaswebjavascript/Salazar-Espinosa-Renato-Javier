@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UsuarioHttpService } from ' ./servicios/http/usuario-http.service';
 import { ProductoHttpService } from ' ./servicios/http/producto-http.service';
-import { ProductoHttpService } from ' ./servicios/http/producto-usario';
+//import { ProductoHttpService } from ' ./servicios/http/producto-usario';
 
 @NgModule({
   declarations: [AppComponent],

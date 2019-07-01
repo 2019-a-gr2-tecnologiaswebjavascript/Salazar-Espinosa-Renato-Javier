@@ -13,7 +13,7 @@ module.exports = {
             min: 1
         }, // Configuracion HIJO
         fkUsuario: { // Nombre del campo FK
-            model: 'usuario', // Modelo a relacionarse (PAPA)
+            model: 'usuario', // Modelo a relacionar "Usuario (PAPA)"
             required: true // OPCIONAL!!!!
         }, // Configuracion HIJO
         fkProducto: { // Nombre del campo FK

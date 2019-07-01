@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { ProductoHttpService } from './servicios/http/producto-http.service';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +13,27 @@ export class AppComponent implements OnInit {
 
   constructor(
     private readonly _httpClient: HttpClient,
-    private readonly _UsuarioHttpService: UsuarioHttpService
+    private readonly _ProductoHttpService: ProductoHttpService
   ) {}
   ngOnInit() {
-    productoUsuario;
+    const usuarioCreado$ = this._ProductoHttpService.crear({
+      nombre: 'Javier',
+      apellido: 'Salazar',
+      codigo: '1'
+    });
+    usuarioCreado$.subscribe(
+      nuevoUsuario => {
+        console.log(nuevoUsuario);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+
+    //productoUsuario;
 
     //"http:localhost:1337"+Usuario
+    //ESTO NO ES MANTENIBLE
     const url = environment.url + '/Usuario';
     this._httpClient.get(url);
     const listaUsuarios$ = this._httpClient.get(url);

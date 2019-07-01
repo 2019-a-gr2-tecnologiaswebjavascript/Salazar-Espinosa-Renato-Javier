@@ -24,6 +24,7 @@ module.exports = {
       minLength: 10,
       maxLength: 25
     },
+
     username: {
       type: 'string',
       required: true,
@@ -49,11 +50,13 @@ module.exports = {
     correo: {
       type: 'string',
       isEmail: true
-    }, // Configuracion PAPA
+    },
+    // Configuracion PAPA
     arregloProductosUsuario: {
-      // nombre de los hijos
-      collection: 'productoUsuario', // modelo a relacionarse (HIJO)
+      //--> nombre del hijo
+      collection: 'productoUsuario', // // Usuario (papa)-> ProductoUsuario (hijo)
       via: 'fkUsuario' // Nombre atributo FK (HIJO)
+      //el campo dentro del otro modelo que se hace referencia aquí
     }
   }
 };
@@ -62,6 +65,6 @@ module.exports = {
 
 // Producto <  ProductosUsuario    > Usuario
 
-// Usuario -> ProductoUsuario
+// Usuario (papa)-> ProductoUsuario (hijo)
 
-// Producto -> ProductoUsuario
+// Producto (papa )-> ProductoUsuario (hijo)

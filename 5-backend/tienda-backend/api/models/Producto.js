@@ -18,10 +18,10 @@ module.exports = {
             required: true,
             unique: true,
             minLength: 4
-        }, // Configuracion de papa
+        }, // Configuracion de papa a hijo
         arregloProductosUsuario: {
-            collection: 'productoUsuario', // Modelo a relacionarse (Hijo)
-            via: 'fkProducto' // FK Modelo a relacionarse
+            collection: 'productoUsuario', //Modelo a relacionarse --> (Hijo)
+            via: 'fkProducto' // FK Modelo a relacionarse del hijo
         }
 
     },
