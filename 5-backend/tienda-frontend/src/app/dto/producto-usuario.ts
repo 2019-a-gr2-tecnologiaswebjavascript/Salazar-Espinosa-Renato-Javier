@@ -1,8 +1,11 @@
+import { Usuario } from './usuario';
+import { Producto } from './producto';
+//producto-usuario.ts  en el DTO
 export interface ProductoUsuario {
   createdAt?: number;
   updatedAt?: number;
   id?: number;
   cantidad: number;
-  fkUsuario: number | any;
-  fkProducto: number | any;
+  fkUsuario: number | Usuario | any;
+  fkProducto: number | Producto | any;
 }

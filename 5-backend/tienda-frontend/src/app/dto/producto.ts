@@ -4,7 +4,6 @@ export interface Producto {
   updatedAt?: number;
   id?: number;
   nombre: string;
-  apellido: string;
   codigo: string;
   arregloProductosUsuario?: any[];
 }
