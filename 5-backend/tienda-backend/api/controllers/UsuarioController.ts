@@ -12,15 +12,22 @@ module.exports = {
   // URL EXPRESSJS => https://expressjs.com/es/4x/api.html
   // REQUEST SAILSJS => https://sailsjs.com/documentation/reference/request-req
   // RESPONSE SAILSJS => https://sailsjs.com/documentation/reference/request-req
+  //https://sailsjs.com/documentation/concepts/blueprints/blueprint-actions
+  //https://sailsjs.com/documentation/reference/blueprint-api/find-one
+  //https://sailsjs.com/documentation/reference/response-res/res-ok
+
   saludar: async (req, res) => {
-    console.log(__dirname);
+    //tanto para la peticion como para la respuesta
+    console.log(__dirname); // variable global llamada _dirname --> donde guardar
     const parametros = req.allParams();
     // req.param('nombre'); => 'Adrian'
     console.log(parametros);
     const nombre = parametros.nombre;
     if (nombre) {
-      // PROMESA!!!! -> SYNC
+      // PROMESA!!!! tipo de prog ASC, q se va a ejecutar en el Futuro ->A CODIGO  SYNC
+      //Se pone la palabra Await
       try {
+        //cuando vota un error de algun tipo, se cae el programa plt usar try y cacht
         const productoEncontrado = await Producto.find({
           where: {
             id: 1
@@ -47,58 +54,64 @@ module.exports = {
       });
     }
   },
+
+  //Creamos otro método para subir un archivo
+
   upload: (req, res) => {
-    const parametros = req.allParams();
+    const parametros = req.allParams(); //para obtenr todos los parametros
 
     const opcionesCarga = {
       maxBytes: 10000000,
-      dirname: __dirname + '/../../archivos'
+      // dirname: __dirname + '/../../archivos'
+      dirname: __dirname + '/../../archivosG'
     };
 
     if (parametros.idProducto) {
-      req.file('imagen').upload(opcionesCarga, async (error, archivosSubidos) => {
-        if (error) {
-          return res.serverError({
-            error: 500,
-            mensaje: 'Error subiendo archivo de imagen'
-          });
-        }
-        const noExistenArchivos = archivosSubidos.length === 0;
-        if (noExistenArchivos) {
-          return res.badRequest({
-            error: 400,
-            mensaje: 'No envia ningun archivo'
-          });
-        } else {
-          console.log(archivosSubidos);
-
-          try {
-            const archivo = archivosSubidos[0];
-            const respuestaActualizar = await Producto.updateOne({
-              id: parametros.idProducto
-            }).set({
-              tamanio: archivo.size,
-              descriptorArchivo: archivo.fd,
-              nombreArchivo: archivo.filename,
-              tipo: archivo.type
-            });
-            return res.ok({
-              mensaje: `Se actualizo el producto ${parametros.idProducto}`
-            });
-          } catch (e) {
+      req
+        .file('imagen') //nombre del archivo : imagen
+        .upload(opcionesCarga, async (error, archivosSubidos) => {
+          if (error) {
             return res.serverError({
               error: 500,
-              mensaje: 'Error del servidor'
+              mensaje: 'Error subiendo archivo de imagen'
             });
           }
+          const noExistenArchivos = archivosSubidos.length === 0;
+          if (noExistenArchivos) {
+            return res.badRequest({
+              error: 400,
+              mensaje: 'No envia ningun archivo'
+            });
+          } else {
+            console.log(archivosSubidos);
 
-          // LOGICA NEGOCIO
-          // GUARDAR LOS METADATOS DEL ARCHIVO
-          // (ID PRODUCTO)
+            try {
+              const archivo = archivosSubidos[0];
+              const respuestaActualizar = await Producto.updateOne({
+                id: parametros.idProducto
+              }).set({
+                tamanio: archivo.size,
+                descriptorArchivo: archivo.fd,
+                nombreArchivo: archivo.filename,
+                tipo: archivo.type
+              });
+              return res.ok({
+                mensaje: `Se actualizo el producto ${parametros.idProducto}`
+              });
+            } catch (e) {
+              return res.serverError({
+                error: 500,
+                mensaje: 'Error del servidor'
+              });
+            }
 
-          return res.ok({ mensaje: 'ok' });
-        }
-      });
+            // LOGICA NEGOCIO
+            // GUARDAR LOS METADATOS DEL ARCHIVO
+            // (ID PRODUCTO)
+
+            return res.ok({ mensaje: 'ok' });
+          }
+        });
     } else {
       return res.error({
         error: 400,

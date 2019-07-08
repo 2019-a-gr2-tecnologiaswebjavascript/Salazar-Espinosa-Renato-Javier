@@ -1,0 +1,7 @@
+.boton {
+    border: 2px salmon;
+    color: blueviolet;
+    background-color: aquamarine;
+    text-align: center;
+    min-width: 30px;
+}

@@ -11,6 +11,7 @@ import { ProductoUsuarioHttpService } from './servicios/http/producto-usuario-ht
 })
 export class AppComponent implements OnInit {
   title = 'tienda-frontend';
+  archivo: File;
 
   constructor(
     private readonly _httpClient: HttpClient,
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
       sueldo: 120,
       tipoUsuario: 'normal'
     });
+
     usuarioCrear$.subscribe(
       nuevoUsuario => {
         console.log(nuevoUsuario);
@@ -79,32 +81,46 @@ export class AppComponent implements OnInit {
       }
     );
   }
+  seleccionarArchivo(evento) {
+    const listaArchivos: FileList = evento.target.files;
+
+    const validaciones = { existeArchivo: listaArchivos.length > 0 };
+    if (validaciones.existeArchivo) {
+      const archivo = listaArchivos[0];
+      console.log(archivo);
+      this.archivo = archivo;
+    }
+  }
+  enviarArchivo() {
+    const producto$ = this._productoHttpService.cargarArchivo(this.archivo, 1);
+    producto$.subscribe(
+      datos => {
+        console.log(datos);
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
 }
 
-/*
+//  createdAt?: number;
+//   updatedAt?: number;
+//   id?: number;
+//   nombre: string;
+//   apellido: string;
+//   cedula: string;
+//   username: string;
+//   sueldo?: number;
+//   estaCasado?: boolean;
+//   tipoUsuario?: 'normal' | 'pendiente' | 'premium';
+//   correo?: string;
+//   arregloProductosUsuario?: any[];
 
- createdAt?: number;
-  updatedAt?: number;
-  id?: number;
-  nombre: string;
-  apellido: string;
-  cedula: string;
-  username: string;
-  sueldo?: number;
-  estaCasado?: boolean;
-  tipoUsuario?: 'normal' | 'pendiente' | 'premium';
-  correo?: string;
-  arregloProductosUsuario?: any[];
-
-
-export interface Producto {
-  createdAt?: number;
-  updatedAt?: number;
-  id?: number;
-  nombre: string;
-  codigo: string;
-  arregloProductosUsuario?: any[];
-}
-
-
-*/
+// export interface Producto {
+//   createdAt?: number;
+//   updatedAt?: number;
+//   id?: number;
+//   nombre: string;
+//   codigo: string;
+//   arregloProductosUsuario?: any[];

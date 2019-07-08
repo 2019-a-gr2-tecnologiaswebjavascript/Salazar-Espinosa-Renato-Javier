@@ -25,7 +25,7 @@ module.exports = {
             type: 'string'
 
         },
-        fileDescriptor: {
+        descriptorArchivo: { //descriptorArchivo
             type: 'string'
         },
         nombreArchivo: {

@@ -9,6 +9,6 @@ export interface Usuario {
   sueldo?: number;
   estaCasado?: boolean;
   tipoUsuario?: 'normal' | 'pendiente' | 'premium';
-  correo?: string;
   arregloProductosUsuario?: any[];
+  correo?: string;
 }
