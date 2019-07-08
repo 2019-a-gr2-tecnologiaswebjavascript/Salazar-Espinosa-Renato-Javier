@@ -10,7 +10,7 @@ export class ProductoHttpService extends HttpSailsPrincipal<Producto> {
     super(_httpClient, environment.url, '/Producto');
   }
   cargarArchivo(archivo: File, idProducto: number) {
-    //formulario de datos mediante JAVASCRIPT--- VIRTUAL
+    //formulario de datos mediante codigo JAVASCRIPT--- VIRTUAL
     const formulario: FormData = new FormData();
     formulario.append('imagen', archivo, archivo.name);
     formulario.append('nombre', 'Javier');

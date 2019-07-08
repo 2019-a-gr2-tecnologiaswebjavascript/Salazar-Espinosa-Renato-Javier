@@ -6,6 +6,13 @@
 
 <label for="imagen" class="boton">Subir imagen</label>
 
-<input id="imagen" type="file" name="imagen" hidden="true" placeholder="eleccionar archivo" (change)="seleccionarArchivo($event)" />
-<h2>Nombre archivo: {{ archivo?.name }}</h2>
+<input id="imagen"
+       type="file" name="imagen"
+       hidden="false"
+       placeholder="Seleccionar archivo"
+       (change)="seleccionarArchivo($event)" >
+<h1>Nombre archivo: '{{ archivo?.name}}'</h1>
+
+
 <button (click)="enviarArchivo()">Enviar archivo</button>
+

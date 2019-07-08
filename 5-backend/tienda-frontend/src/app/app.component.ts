@@ -81,27 +81,30 @@ export class AppComponent implements OnInit {
       }
     );
   }
-  seleccionarArchivo(evento) {
+  seleccionarArchivo(evento) { //VAMOS A recibir el EVENTO
     const listaArchivos: FileList = evento.target.files;
+
 
     const validaciones = { existeArchivo: listaArchivos.length > 0 };
     if (validaciones.existeArchivo) {
       const archivo = listaArchivos[0];
       console.log(archivo);
-      this.archivo = archivo;
+      this.archivo = archivo; //guardamos el archivo
+      const nombre = archivo.name;
+
     }
   }
+
   enviarArchivo() {
     const producto$ = this._productoHttpService.cargarArchivo(this.archivo, 1);
-    producto$.subscribe(
-      datos => {
-        console.log(datos);
-      },
-      error => {
-        console.error(error);
-      }
-    );
-  }
+    producto$.subscribe(datos => {
+       console.log(datos);
+    }, error => {
+         console.log(error);
+    });
+
+}
+
 }
 
 //  createdAt?: number;
