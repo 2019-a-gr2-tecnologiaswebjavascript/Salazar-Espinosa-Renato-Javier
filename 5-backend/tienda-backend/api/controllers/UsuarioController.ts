@@ -6,6 +6,7 @@
  */
 declare var Producto;
 
+
 module.exports = {
   // req = peticion = request
   // res = respuesta = response
@@ -17,6 +18,7 @@ module.exports = {
   //https://sailsjs.com/documentation/reference/response-res/res-ok
 
   saludar: async (req, res) => {
+    //creamos el metodo saludar
     //tanto para la peticion como para la respuesta
     console.log(__dirname); // variable global llamada _dirname --> donde guardar
     const parametros = req.allParams();
@@ -58,60 +60,57 @@ module.exports = {
   //Creamos otro método para subir un archivo
 
   upload: (req, res) => {
-    const parametros = req.allParams(); //para obtenr todos los parametros
+    const parametros = req.allParams();
 
     const opcionesCarga = {
       maxBytes: 10000000,
-      // dirname: __dirname + '/../../archivos'
-      dirname: __dirname + '/../../archivosG'
+      dirname: __dirname + '/../../archivos',
     };
 
     if (parametros.idProducto) {
-      req
-        .file('imagen') //nombre del archivo : imagen
-        .upload(opcionesCarga, async (error, archivosSubidos) => {
-          if (error) {
+      req.file('imagen').upload(opcionesCarga, async (error, archivosSubidos) => {
+        if (error) {
+          return res.serverError({
+            error: 500,
+            mensaje: 'Error subiendo archivo de imagen'
+          });
+        }
+        const noExistenArchivos = archivosSubidos.length === 0;
+        if (noExistenArchivos) {
+          return res.badRequest({
+            error: 400,
+            mensaje: 'No envia ningun archivo'
+          });
+        } else {
+          console.log(archivosSubidos);
+
+          try {
+            const archivo = archivosSubidos[0];
+            const respuestaActualizar = await Producto.updateOne({
+              id: parametros.idProducto
+            }).set({
+              tamanio: archivo.size,
+              descriptorArchivo: archivo.fd,
+              nombreArchivo: archivo.filename,
+              tipo: archivo.type
+            });
+            return res.ok({
+              mensaje: `Se actualizo el producto ${parametros.idProducto}`
+            });
+          } catch (e) {
             return res.serverError({
               error: 500,
-              mensaje: 'Error subiendo archivo de imagen'
+              mensaje: 'Error del servidor'
             });
           }
-          const noExistenArchivos = archivosSubidos.length === 0;
-          if (noExistenArchivos) {
-            return res.badRequest({
-              error: 400,
-              mensaje: 'No envia ningun archivo'
-            });
-          } else {
-            console.log(archivosSubidos);
 
-            try {
-              const archivo = archivosSubidos[0];
-              const respuestaActualizar = await Producto.updateOne({
-                id: parametros.idProducto
-              }).set({
-                tamanio: archivo.size,
-                descriptorArchivo: archivo.fd,
-                nombreArchivo: archivo.filename,
-                tipo: archivo.type
-              });
-              return res.ok({
-                mensaje: `Se actualizo el producto ${parametros.idProducto}`
-              });
-            } catch (e) {
-              return res.serverError({
-                error: 500,
-                mensaje: 'Error del servidor'
-              });
-            }
+          // LOGICA NEGOCIO
+          // GUARDAR LOS METADATOS DEL ARCHIVO
+          // (ID PRODUCTO)
 
-            // LOGICA NEGOCIO
-            // GUARDAR LOS METADATOS DEL ARCHIVO
-            // (ID PRODUCTO)
-
-            return res.ok({ mensaje: 'ok' });
-          }
-        });
+          return res.ok({ mensaje: 'ok' });
+        }
+      });
     } else {
       return res.error({
         error: 400,
@@ -121,6 +120,7 @@ module.exports = {
   },
   download: async (req, res) => {
     const parametros = req.allParams();
+    console.log(parametros);
     if (parametros.idProducto) {
       try {
         const productoEncontrado = await Producto.findOne({
@@ -134,6 +134,7 @@ module.exports = {
           });
         } else {
           if (productoEncontrado.descriptorArchivo) {
+            console.log(productoEncontrado.nombreArchivo);
             return res.download(
               productoEncontrado.descriptorArchivo,
               productoEncontrado.nombreArchivo
