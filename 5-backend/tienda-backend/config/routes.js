@@ -21,5 +21,9 @@ module.exports.routes = { // metodos dentro del backend
     },
     'GET /descargarArchivo/:idProducto': {
         action: 'usuario/download'
-    }
+    },
+    'POST /prenderLed/:idLet': {
+        action: 'usuario/download'
+    },
+
 };
