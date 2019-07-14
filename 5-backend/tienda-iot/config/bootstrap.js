@@ -36,7 +36,7 @@ module.exports.bootstrap = async function() {
 
 };
 
-function cambioHumedad(axios) {
+function cambioHumedad(axios) { //AXIOS para poder enviar la peticion http
     setInterval(
         async() => {
             const temperaturaActual = Math.random(10) * 10;
