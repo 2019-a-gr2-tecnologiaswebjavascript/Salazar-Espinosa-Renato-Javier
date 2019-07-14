@@ -1,0 +1,7 @@
+.boton {
+    border: 2px solid;
+    color: black;
+    background-color: skyblue;
+    text-align: center;
+    min-width: 40px;
+}
